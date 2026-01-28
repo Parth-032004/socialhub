@@ -1,52 +1,217 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Social Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="logo.png">
-  <style>
-    body {
-      margin: 0;
-      background: #0f0f0f;
-      font-family: system-ui, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color: white;
-    }
-    .card {
-      background: #1c1c1c;
-      padding: 26px;
-      border-radius: 18px;
-      width: 320px;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(0,0,0,.6);
-    }
-    a {
-      display: block;
-      margin: 12px 0;
-      padding: 14px;
-      background: #2a2a2a;
-      border-radius: 12px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
-    a:hover {
-      background: #3b3b3b;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Parth’s Social Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Unique Font -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    color: white;
+    font-family: system-ui, sans-serif;
+  }
+
+  /* ===== UNIVERSE ===== */
+  #universe {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: #000;
+  }
+
+  /* ===== CENTER ===== */
+  .container {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  .container.exit {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+
+  .hub {
+    padding: 32px 30px 36px;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.8);
+    width: 420px;
+    text-align: center;
+  }
+
+  h1 {
+    margin: 0 0 26px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+  }
+
+  /* ===== ICON GRID ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 22px;
+  }
+
+  .app {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .icon-box {
+    width: 66px;
+    height: 66px;
+    margin: auto;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: rgba(255,255,255,0.16);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  /* Glow */
+  .ig { box-shadow: 0 0 18px rgba(225,48,108,0.35); color: #E1306C; }
+  .fb { box-shadow: 0 0 18px rgba(24,119,242,0.35); color: #1877F2; }
+  .tw { box-shadow: 0 0 18px rgba(29,161,242,0.35); color: #1DA1F2; }
+  .tg { box-shadow: 0 0 18px rgba(42,171,238,0.35); color: #2AABEE; }
+  .wa { box-shadow: 0 0 18px rgba(37,211,102,0.35); color: #25D366; }
+
+  .app:hover .icon-box {
+    transform: translateY(-4px) scale(1.08);
+    background: rgba(255,255,255,0.28);
+  }
+
+  .app:active .icon-box {
+    transform: scale(0.92);
+  }
+
+  .label {
+    margin-top: 8px;
+    font-size: 13px;
+    opacity: 0.85;
+  }
+</style>
 </head>
+
 <body>
 
-<div class="card">
-  <h2>Social Hub</h2>
-  <a href="https://instagram.com">Instagram</a>
-  <a href="https://facebook.com">Facebook</a>
-  <a href="https://twitter.com">X (Twitter)</a>
-  <a href="https://web.whatsapp.com">WhatsApp</a>
+<canvas id="universe"></canvas>
+
+<div class="container" id="hubContainer">
+  <div class="hub">
+    <h1>Parth’s Social Hub</h1>
+
+    <div class="grid">
+      <div class="app" data-url="https://instagram.com">
+        <div class="icon-box ig"><i class="fab fa-instagram"></i></div>
+        <div class="label">Instagram</div>
+      </div>
+
+      <div class="app" data-url="https://facebook.com">
+        <div class="icon-box fb"><i class="fab fa-facebook"></i></div>
+        <div class="label">Facebook</div>
+      </div>
+
+      <div class="app" data-url="https://twitter.com">
+        <div class="icon-box tw"><i class="fab fa-x-twitter"></i></div>
+        <div class="label">X</div>
+      </div>
+
+      <div class="app" data-url="https://t.me">
+        <div class="icon-box tg"><i class="fab fa-telegram"></i></div>
+        <div class="label">Telegram</div>
+      </div>
+
+      <div class="app" data-url="https://web.whatsapp.com">
+        <div class="icon-box wa"><i class="fab fa-whatsapp"></i></div>
+        <div class="label">WhatsApp</div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  /* ===== CLICK ANIMATION + NEW TAB ===== */
+  const container = document.getElementById("hubContainer");
+
+  document.querySelectorAll(".app").forEach(app => {
+    app.addEventListener("click", () => {
+      const url = app.dataset.url;
+      container.classList.add("exit");
+
+      setTimeout(() => {
+        window.open(url, "_blank");
+        container.classList.remove("exit");
+      }, 280);
+    });
+  });
+
+  /* ===== UNIVERSE BACKGROUND ===== */
+  const canvas = document.getElementById("universe");
+  const ctx = canvas.getContext("2d");
+  let stars = [];
+
+  function resizeUniverse() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = innerWidth * dpr;
+    canvas.height = innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    stars = Array.from({ length: 700 }, () => ({
+      x: (Math.random() - 0.5) * innerWidth,
+      y: (Math.random() - 0.5) * innerHeight,
+      r: Math.random() * 1.8,
+      a: Math.random(),
+      s: Math.random() * 0.18 + 0.05
+    }));
+  }
+
+  resizeUniverse();
+  window.addEventListener("resize", resizeUniverse);
+
+  function drawUniverse() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.translate(innerWidth / 2, innerHeight / 2);
+
+    stars.forEach(star => {
+      star.y += star.s;
+      if (star.y > innerHeight / 2) star.y = -innerHeight / 2;
+
+      ctx.globalAlpha = star.a;
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.restore();
+    requestAnimationFrame(drawUniverse);
+  }
+
+  drawUniverse();
+</script>
 
 </body>
 </html>

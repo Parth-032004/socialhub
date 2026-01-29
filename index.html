@@ -2,123 +2,161 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Parth’s Social Hub</title>
+<title>Parth’s Hub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="manifest.json">
 
-<!-- FAVICON -->
-<link rel="icon" type="image/png" href="logo.png">
-
-<!-- PWA MANIFEST (FIXES "M" ICON ISSUE) -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
-
-<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
-
-<!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  background: #000;
-  color: white;
-  font-family: system-ui, sans-serif;
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  background:#000;
+  color:#fff;
+  font-family:system-ui,sans-serif;
 }
 
-/* ===== UNIVERSE ===== */
-#universe {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background: #000;
+/* Universe */
+#universe{
+  position:fixed;
+  inset:0;
+  z-index:0;
 }
 
-/* ===== CENTER ===== */
-.container {
-  position: relative;
-  z-index: 1;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.35s ease, opacity 0.35s ease;
+/* Layout */
+.wrapper{
+  position:relative;
+  z-index:1;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.container.exit {
-  transform: scale(0.92);
-  opacity: 0;
+.container{
+  display:flex;
+  gap:40px;
+  transition:.35s ease;
 }
 
-.hub {
-  padding: 32px 30px 36px;
-  border-radius: 28px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 30px 90px rgba(0,0,0,0.8);
-  width: 420px;
-  text-align: center;
+.container.exit{
+  transform:scale(.92);
+  opacity:0;
 }
 
-h1 {
-  margin: 0 0 26px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 30px;
-  font-weight: 600;
-  letter-spacing: 0.7px;
+/* Glass boxes */
+.box{
+  padding:30px;
+  border-radius:28px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  box-shadow:0 30px 90px rgba(0,0,0,.8);
+  text-align:center;
 }
 
-/* ===== ICON GRID ===== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 22px;
+.box.social{ width:420px; }
+.box.ott{ width:560px; }
+
+h1{
+  margin:0 0 24px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:26px;
 }
 
-.app {
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
-  user-select: none;
+/* Grid */
+.grid{
+  display:grid;
+  gap:22px;
+  justify-items:center;
 }
 
-.icon-box {
-  width: 66px;
-  height: 66px;
-  margin: auto;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  background: rgba(255,255,255,0.16);
-  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+.grid.social{
+  grid-template-columns:repeat(5,1fr);
 }
 
-/* Glow Colors */
-.ig { box-shadow: 0 0 18px rgba(225,48,108,0.35); color: #E1306C; }
-.fb { box-shadow: 0 0 18px rgba(24,119,242,0.35); color: #1877F2; }
-.tw { box-shadow: 0 0 18px rgba(29,161,242,0.35); color: #1DA1F2; }
-.tg { box-shadow: 0 0 18px rgba(42,171,238,0.35); color: #2AABEE; }
-.wa { box-shadow: 0 0 18px rgba(37,211,102,0.35); color: #25D366; }
-
-.app:hover .icon-box {
-  transform: translateY(-4px) scale(1.08);
-  background: rgba(255,255,255,0.28);
+.grid.ott{
+  grid-template-columns:repeat(6,1fr);
 }
 
-.app:active .icon-box {
-  transform: scale(0.92);
+/* App item */
+.app{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  cursor:pointer;
 }
 
-.label {
-  margin-top: 8px;
-  font-size: 13px;
-  opacity: 0.85;
+/* Social icons */
+.icon{
+  width:70px;
+  height:70px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.18);
+  font-size:28px;
+  transition:.25s ease;
 }
+
+/* OTT icons */
+.logo-box{
+  width:72px;
+  height:72px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--bg);
+  transition:.25s ease;
+}
+
+.logo-box img{
+  width:82%;
+  height:82%;
+  object-fit:contain;
+}
+
+/* Hover */
+.app:hover .icon,
+.app:hover .logo-box{
+  transform:translateY(-4px) scale(1.06);
+}
+
+/* Labels */
+.label{
+  margin-top:8px;
+  font-size:13px;
+  opacity:.9;
+  text-align:center;
+}
+
+/* Social colors */
+.ig{color:#E1306C}
+.fb{color:#1877F2}
+.tw{color:#1DA1F2}
+.tg{color:#2AABEE}
+.wa{color:#25D366}
+
+/* OTT backgrounds (NO GLOW) */
+.netflix{--bg:#1a0003}
+.prime{--bg:#00151c}
+.hotstar{--bg:#040b2d}
+.sony{--bg:#001f1f}
+.zee{--bg:#1a002b}
+.mx{--bg:#001a22}
+.shemaroo{--bg:#1a0c00}
+.lionsgate{--bg:#0c0c0c}
+.alt{--bg:#1a000f}
+.eros{--bg:#1a0000}
+.discovery{--bg:#001820}
+.epic{--bg:#1a1300}
+.docu{--bg:#0d1a00}
+.etv{--bg:#001a12}
+.fancode{--bg:#1a0a00}
+.youtube{--bg:#1a0000}
 </style>
 </head>
 
@@ -126,99 +164,94 @@ h1 {
 
 <canvas id="universe"></canvas>
 
-<div class="container" id="hubContainer">
-  <div class="hub">
-    <h1>Parth’s Social Hub</h1>
+<div class="wrapper">
+  <div class="container" id="container">
 
-    <div class="grid">
-      <div class="app" data-url="https://instagram.com">
-        <div class="icon-box ig"><i class="fab fa-instagram"></i></div>
-        <div class="label">Instagram</div>
-      </div>
-
-      <div class="app" data-url="https://facebook.com">
-        <div class="icon-box fb"><i class="fab fa-facebook"></i></div>
-        <div class="label">Facebook</div>
-      </div>
-
-      <div class="app" data-url="https://twitter.com">
-        <div class="icon-box tw"><i class="fab fa-x-twitter"></i></div>
-        <div class="label">X</div>
-      </div>
-
-      <div class="app" data-url="https://t.me">
-        <div class="icon-box tg"><i class="fab fa-telegram"></i></div>
-        <div class="label">Telegram</div>
-      </div>
-
-      <div class="app" data-url="https://web.whatsapp.com">
-        <div class="icon-box wa"><i class="fab fa-whatsapp"></i></div>
-        <div class="label">WhatsApp</div>
+    <!-- SOCIAL HUB -->
+    <div class="box social">
+      <h1>Parth’s Social Hub</h1>
+      <div class="grid social">
+        <div class="app" data-url="https://instagram.com">
+          <div class="icon ig"><i class="fab fa-instagram"></i></div>
+          <div class="label">Instagram</div>
+        </div>
+        <div class="app" data-url="https://facebook.com">
+          <div class="icon fb"><i class="fab fa-facebook"></i></div>
+          <div class="label">Facebook</div>
+        </div>
+        <div class="app" data-url="https://twitter.com">
+          <div class="icon tw"><i class="fab fa-x-twitter"></i></div>
+          <div class="label">X</div>
+        </div>
+        <div class="app" data-url="https://t.me">
+          <div class="icon tg"><i class="fab fa-telegram"></i></div>
+          <div class="label">Telegram</div>
+        </div>
+        <div class="app" data-url="https://web.whatsapp.com">
+          <div class="icon wa"><i class="fab fa-whatsapp"></i></div>
+          <div class="label">WhatsApp</div>
+        </div>
       </div>
     </div>
+
+    <!-- OTT HUB -->
+    <div class="box ott">
+      <h1>OTT Platforms</h1>
+      <div class="grid ott">
+
+        <div class="app netflix" data-url="https://netflix.com"><div class="logo-box"><img src="https://cdn.simpleicons.org/netflix/e50914"></div><div class="label">Netflix</div></div>
+        <div class="app prime" data-url="https://primevideo.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png"></div><div class="label">Prime Video</div></div>
+        <div class="app hotstar" data-url="https://hotstar.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Disney%2B_Hotstar_logo.svg"></div><div class="label">Hotstar</div></div>
+        <div class="app sony" data-url="https://sonyliv.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/en/7/7a/SonyLIV_logo.png"></div><div class="label">Sony LIV</div></div>
+        <div class="app zee" data-url="https://zee5.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/ZEE5_logo.png"></div><div class="label">ZEE5</div></div>
+        <div class="app mx" data-url="https://mxplayer.in"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/MX_Player_Logo.png"></div><div class="label">MX Player</div></div>
+
+        <div class="app shemaroo" data-url="https://shemaroome.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/ShemarooMe_Logo.png"></div><div class="label">ShemarooMe</div></div>
+        <div class="app lionsgate" data-url="https://lionsgateplay.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Lionsgate_Play_logo.png"></div><div class="label">Lionsgate</div></div>
+        <div class="app alt" data-url="https://altbalaji.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/ALTBalaji_logo.png"></div><div class="label">ALTBalaji</div></div>
+        <div class="app eros" data-url="https://erosnow.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Eros_Now_logo.png"></div><div class="label">Eros Now</div></div>
+        <div class="app discovery" data-url="https://discoveryplus.in"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Discovery%2B_logo.png"></div><div class="label">Discovery+</div></div>
+        <div class="app epic" data-url="https://epicon.in"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Epic_ON_logo.png"></div><div class="label">EPIC ON</div></div>
+
+        <div class="app docu" data-url="https://docubay.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/DocuBay_logo.png"></div><div class="label">Docubay</div></div>
+        <div class="app etv" data-url="https://etvwin.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/48/ETV_Win_Logo.png"></div><div class="label">ETV Win</div></div>
+        <div class="app fancode" data-url="https://fancode.com"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/FanCode_Logo.png"></div><div class="label">FanCode</div></div>
+        <div class="app youtube" data-url="https://youtube.com"><div class="logo-box"><img src="https://cdn.simpleicons.org/youtube/ff0000"></div><div class="label">YouTube</div></div>
+
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-/* ===== CLICK ANIMATION + OPEN NEW TAB ===== */
-const container = document.getElementById("hubContainer");
-
-document.querySelectorAll(".app").forEach(app => {
-  app.addEventListener("click", () => {
-    const url = app.dataset.url;
+const container=document.getElementById("container");
+document.querySelectorAll(".app").forEach(app=>{
+  app.onclick=()=>{
     container.classList.add("exit");
-
-    setTimeout(() => {
-      window.open(url, "_blank");
+    setTimeout(()=>{
+      window.open(app.dataset.url,"_blank");
       container.classList.remove("exit");
-    }, 280);
-  });
+    },280);
+  };
 });
 
-/* ===== UNIVERSE BACKGROUND ===== */
-const canvas = document.getElementById("universe");
-const ctx = canvas.getContext("2d");
-let stars = [];
-
-function resizeUniverse() {
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = innerWidth * dpr;
-  canvas.height = innerHeight * dpr;
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  stars = Array.from({ length: 700 }, () => ({
-    x: (Math.random() - 0.5) * innerWidth,
-    y: (Math.random() - 0.5) * innerHeight,
-    r: Math.random() * 1.8,
-    a: Math.random(),
-    s: Math.random() * 0.18 + 0.05
-  }));
+/* Universe background */
+const c=document.getElementById("universe"),x=c.getContext("2d");
+let s=[];
+function resize(){
+  const d=window.devicePixelRatio||1;
+  c.width=innerWidth*d;c.height=innerHeight*d;
+  x.setTransform(d,0,0,d,0,0);
+  s=[...Array(700)].map(()=>({x:(Math.random()-.5)*innerWidth,y:(Math.random()-.5)*innerHeight,r:Math.random()*1.8,a:Math.random(),v:Math.random()*.18+.05}));
 }
-
-resizeUniverse();
-window.addEventListener("resize", resizeUniverse);
-
-function drawUniverse() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.save();
-  ctx.translate(innerWidth / 2, innerHeight / 2);
-
-  stars.forEach(star => {
-    star.y += star.s;
-    if (star.y > innerHeight / 2) star.y = -innerHeight / 2;
-
-    ctx.globalAlpha = star.a;
-    ctx.fillStyle = "#fff";
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-    ctx.fill();
-  });
-
-  ctx.restore();
-  requestAnimationFrame(drawUniverse);
-}
-
-drawUniverse();
+resize();onresize=resize;
+(function draw(){
+  x.clearRect(0,0,c.width,c.height);
+  x.save();x.translate(innerWidth/2,innerHeight/2);
+  s.forEach(o=>{o.y+=o.v;if(o.y>innerHeight/2)o.y=-innerHeight/2;x.globalAlpha=o.a;x.fillStyle="#fff";x.beginPath();x.arc(o.x,o.y,o.r,0,Math.PI*2);x.fill();});
+  x.restore();requestAnimationFrame(draw);
+})();
 </script>
 
 </body>
